@@ -30,12 +30,12 @@ const pokemonImage = computed(() => pokemonData.value?.sprites?.front_default);
 				/>
 			</div>
 			<div class="flex gap-4 mx-auto">
-				<NuxtLink :to="`/${route.params.id}/abilities`" class="p-2 underline"
-					>Abilities</NuxtLink
-				>
-				<NuxtLink :to="`/${route.params.id}/stats`" class="p-2 underline"
-					>Stats</NuxtLink
-				>
+				<NuxtLink :to="`/${route.params.id}/abilities`" class="p-2 underline">
+					Abilities
+				</NuxtLink>
+				<NuxtLink :to="`/${route.params.id}/stats`" class="p-2 underline">
+					Stats
+				</NuxtLink>
 			</div>
 			<div>
 				<NuxtPage :pokemonData="pokemonData" />
