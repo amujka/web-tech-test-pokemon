@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import { Pokemon } from 'types/pokemon';
+
 const props = defineProps<{
-	pokemonData: object;
+	pokemonData: Pokemon;
 }>();
 
 const abilities = computed(() => props.pokemonData.abilities);
