@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useVuelidate } from '@vuelidate/core';
 import { required, integer } from '@vuelidate/validators';
-const input = ref<HTMLInputElement>();
 
+const input = ref<HTMLInputElement>();
 const pokemonId = ref();
 
 const rules = computed(() => {
@@ -11,27 +11,21 @@ const rules = computed(() => {
 	};
 });
 const v$ = useVuelidate(rules, { pokemonId });
+const isBtnDisabled = computed(() => v$.value.pokemonId.$invalid);
 
-const submitPokemonId = async () => {
-	const isValid = await v$.value.$validate();
-	if (isValid) {
-		navigateTo({
-			path: `/${pokemonId.value}`,
-		});
-	}
-};
+const submitPokemonId = () => navigateTo({ path: `/${pokemonId.value}` });
 </script>
 <template>
 	<div class="flex flex-col gap-5 items-center">
 		<form class="flex flex-col gap-2 mt-10" @submit.prevent="submitPokemonId">
 			<label @click="input?.focus()">Enter pokemon id:</label>
-			<input v-model="pokemonId" ref="input" class="border border" />
+			<input v-model="v$.pokemonId.$model" ref="input" class="border border" />
 			<button
 				:class="[
-					{ 'bg-slate-500': v$.$error },
+					{ 'bg-slate-500': isBtnDisabled },
 					'p-2 rounded bg-black text-white',
 				]"
-				:disabled="v$.$error"
+				:disabled="isBtnDisabled"
 			>
 				View pokemon
 			</button>
